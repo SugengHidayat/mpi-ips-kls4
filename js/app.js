@@ -1,30 +1,18 @@
 const App = {
-
   start() {
-    console.log("✅ App.start() jalan");
+    console.log("App start");
+
+    if (typeof Flipbook === "undefined") {
+      alert("❌ Flipbook.js belum terbaca!");
+      return;
+    }
 
     const cover = document.getElementById("cover");
     const flipbook = document.getElementById("flipbook");
 
-    if (!cover || !flipbook) {
-      alert("Elemen tidak ditemukan!");
-      return;
-    }
-
     cover.style.display = "none";
+    flipbook.classList.remove("hidden");
 
-    try {
-      Flipbook.init();
-    } catch (e) {
-      console.error("ERROR:", e);
-      alert("Terjadi error: " + e.message);
-    }
-  },
-
-  goQuiz() {
-    document.getElementById("flipbook").classList.add("hidden");
-    document.getElementById("quizPage").classList.remove("hidden");
-    Quiz.start();
+    Flipbook.init();
   }
-
 };
