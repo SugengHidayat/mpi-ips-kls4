@@ -92,4 +92,40 @@ const PiktogramData = [
   }
 
 ];
-``
+
+const Piktogram = {
+
+  renderAll(containerId) {
+    const container = document.getElementById(containerId);
+
+    container.innerHTML = PiktogramData.map(p => `
+      <div style="margin-bottom:40px;">
+        <h3>${p.judul}</h3>
+        <canvas id="${p.id}"></canvas>
+      </div>
+    `).join("");
+
+    PiktogramData.forEach(p => {
+      const ctx = document.getElementById(p.id);
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: p.labels,
+          datasets: [{
+            label: p.judul,
+            data: p.data,
+            backgroundColor: ["#ff8c00","#0077b6","#999"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    });
+  }
+
+};
