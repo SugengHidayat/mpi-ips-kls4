@@ -3,44 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Aku Cerdas Mengelola Kebutuhan</title>
 
-  <!-- CSS -->
+  <!-- ================= CSS ================= -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/flipbook.css">
+
 </head>
 
 <body>
 
 <div id="app">
 
-  <!-- COVER -->
+  <!-- ================= COVER AWAL ================= -->
   <section id="cover">
     <h1>Aku Cerdas Mengelola Kebutuhan</h1>
-    <h3>IPS Kelas 4 SD</h3>
-    <button onclick="App.start()">Mulai Belajar</button>
+    <h3>Literasi & Numerasi IPS Kelas 4 SD</h3>
+
+    <button onclick="App.start()">
+      Mulai Belajar
+    </button>
   </section>
 
-  <!-- FLIPBOOK -->
+  <!-- ================= FLIPBOOK ================= -->
   <div id="flipbook" class="hidden"></div>
 
 </div>
 
-<!-- ================= LIBRARY (ONLINE CDN) ================= -->
 
-<!-- ✅ jQuery WAJIB -->
+<!-- ===================================================
+     LIBRARY ONLINE (STABIL & TERUJI)
+=================================================== -->
+
+<!-- ✅ jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- ✅ turn.js (FIX dari lib lokal) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+<!-- ✅ turn.js versi STABIL (bukan cdnjs lama) -->
+<script src="https://cdn.jsdelivr.net/gh/blasten/turn.js@master/turn.min.js"></script>
 
-<!-- ✅ Chart -->
+<!-- ✅ Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- ================= MODULE ================= -->
 
-<script src="js/flipbook.js"></script> 
+<!-- ===================================================
+     MODULE APLIKASI
+=================================================== -->
+
+<!-- ⚠️ URUTAN PENTING -->
+<script src="js/flipbook.js"></script>
 <script src="js/app.js"></script>
+
+
+<!-- ===================================================
+     DEBUG SYSTEM (WAJIB SAAT PENGEMBANGAN)
+=================================================== -->
+<script>
+  // menangkap semua error JS
+  window.onerror = function(msg, url, line) {
+    console.error("ERROR:", msg, "di baris", line);
+  };
+
+  console.log("✅ index.html loaded dengan baik");
+</script>
 
 </body>
 </html>
