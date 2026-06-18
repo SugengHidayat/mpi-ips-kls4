@@ -1,7 +1,7 @@
 const Flipbook = {
 
   init() {
-    console.log("✅ Flipbook aktif");
+    console.log("✅ Flipbook FULL AKM aktif");
 
     const el = document.getElementById("flipbook");
 
@@ -15,18 +15,13 @@ const Flipbook = {
           <img src="img/guru.png" width="120">
         </div>
 
-        <!-- HALAMAN 1 -->
+        <!-- ================= MATERI ================= -->
+
         <div class="page">
           <h2>Apa itu Kebutuhan?</h2>
-          <p>Kebutuhan adalah sesuatu yang harus dipenuhi agar manusia dapat hidup dengan baik.</p>
-          <ul>
-            <li>Makan</li>
-            <li>Pakaian</li>
-            <li>Tempat tinggal</li>
-          </ul>
+          <p>Kebutuhan adalah sesuatu yang harus dipenuhi agar hidup nyaman.</p>
         </div>
 
-        <!-- HALAMAN 2 -->
         <div class="page">
           <h2>Jenis Kebutuhan</h2>
           <ul>
@@ -36,39 +31,28 @@ const Flipbook = {
           </ul>
         </div>
 
-        <!-- HALAMAN 3 (PIKTOGRAM 1) -->
+        <!-- ================= PIKTOGRAM SET 1 ================= -->
+        <div class="page"><h2>Data Kebutuhan</h2><canvas id="c1"></canvas><canvas id="c2"></canvas><canvas id="c3"></canvas></div>
+
+        <!-- ================= SET 2 ================= -->
+        <div class="page"><h2>Data Siswa</h2><canvas id="c4"></canvas><canvas id="c5"></canvas><canvas id="c6"></canvas></div>
+
+        <!-- ================= SET 3 ================= -->
+        <div class="page"><h2>Data Uang</h2><canvas id="c7"></canvas><canvas id="c8"></canvas><canvas id="c9"></canvas></div>
+
+        <!-- ================= SET 4 ================= -->
+        <div class="page"><h2>Data Aktivitas</h2><canvas id="c10"></canvas><canvas id="c11"></canvas><canvas id="c12"></canvas></div>
+
+        <!-- ================= SET 5 ================= -->
+        <div class="page"><h2>Skala Prioritas</h2><canvas id="c13"></canvas><canvas id="c14"></canvas><canvas id="c15"></canvas></div>
+
+        <!-- ================= LATIHAN ================= -->
         <div class="page">
-          <h2>Piktogram Kebutuhan</h2>
-          <canvas id="chart1"></canvas>
-        </div>
-
-        <!-- HALAMAN 4 (PIKTOGRAM 2) -->
-        <div class="page">
-          <h2>Pengeluaran Siswa</h2>
-          <canvas id="chart2"></canvas>
-        </div>
-
-        <!-- HALAMAN 5 -->
-        <div class="page">
-          <h2>Latihan</h2>
-          <p>Uang Andi Rp20.000</p>
-          <p>Beli buku Rp10.000 dan snack Rp5.000</p>
-          <p>Sisa uang berapa?</p>
-
-          <button onclick="Flipbook.cek(5000)">Rp5.000</button>
-          <button onclick="Flipbook.cek(3000)">Rp3.000</button>
-
+          <h2>Latihan AKM</h2>
+          <p>Dari grafik, mana kebutuhan paling tinggi?</p>
+          <button onclick="Flipbook.jawab(true)">Makan</button>
+          <button onclick="Flipbook.jawab(false)">Mainan</button>
           <p id="hasil"></p>
-        </div>
-
-        <!-- HALAMAN 6 -->
-        <div class="page">
-          <h2>Kesimpulan</h2>
-          <ul>
-            <li>Dahulukan kebutuhan utama</li>
-            <li>Hemat uang</li>
-            <li>Jangan boros</li>
-          </ul>
         </div>
 
       </div>
@@ -79,55 +63,54 @@ const Flipbook = {
   },
 
 
+  /* ================= TURN JS ================= */
   initTurn() {
     $('#book').turn({
       width: 900,
       height: 550,
-      autoCenter: true
+      autoCenter: true,
+      gradients: true,
+      elevation: 50
     });
   },
 
 
+  /* ================= CHART ENGINE ================= */
+  makeChart(id, labels, data) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: ['#ff8c00', '#0077b6', '#999']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+  },
+
+
+  /* ================= RENDER 15 CHART ================= */
   renderCharts() {
 
-    // Chart 1
-    const ctx1 = document.getElementById("chart1");
-    new Chart(ctx1, {
-      type: 'bar',
-      data: {
-        labels: ['Makan', 'Buku', 'Mainan'],
-        datasets: [{
-          data: [5,3,2],
-          backgroundColor: ['orange','blue','gray']
-        }]
-      }
-    });
+    this.makeChart("c1", ["Makan","Minum","Belajar"], [5,3,4]);
+    this.makeChart("c2", ["Buku","Tas","Pensil"], [4,2,6]);
+    this.makeChart("c3", ["Sabun","Baju","Sepatu"], [3,5,2]);
 
-    // Chart 2
-    const ctx2 = document.getElementById("chart2");
-    new Chart(ctx2, {
-      type: 'bar',
-      data: {
-        labels: ['Makan','Transport','Main'],
-        datasets: [{
-          data: [10,5,3],
-          backgroundColor: ['orange','blue','gray']
-        }]
-      }
-    });
-  },
+    this.makeChart("c4", ["Ani","Budi","Cici"], [10,8,12]);
+    this.makeChart("c5", ["Main","Belajar","Tidur"], [4,3,5]);
+    this.makeChart("c6", ["Sepeda","Jalan","Motor"], [3,5,2]);
 
+    this.makeChart("c7", ["Senin","Rabu","Jumat"], [2000,3000,5000]);
+    this.makeChart("c8", ["Jajan","Tabung","Belanja"], [5,7,3]);
+    this.makeChart("c9", ["Transport","Makan","Main"], [5,10,3]);
 
-  cek(j) {
-    const hasil = document.getElementById("hasil");
-
-    if(j === 5000){
-      hasil.innerHTML = "✅ Benar!";
-      hasil.style.color = "green";
-    } else {
-      hasil.innerHTML = "❌ Salah!";
-      hasil.style.color = "red";
-    }
-  }
-
-};
+    this.makeChart("c10", ["Pagi","Siang","Malam"], [2,3,1]);
+    this.makeChart("c11", ["Olah raga","Main","Belajar"], [3,4,5]);
