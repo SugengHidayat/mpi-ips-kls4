@@ -78,3 +78,9 @@
     font-size: 16px;
   }
 }
+
+<!-- HALAMAN PIKTOGRAM FULL -->
+<div class="page">
+  <h2>Analisis Data (AKM)</h2>
+  <div id="piktogramContainer"></div>
+</div>
