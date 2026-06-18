@@ -2,39 +2,66 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Aku Cerdas Mengelola Kebutuhan</title>
 
+  <!-- META SEO -->
+  <meta name="description" content="Media Pembelajaran Interaktif IPS Kelas 4 SD - Aku Cerdas Mengelola Kebutuhan">
+  <meta name="author" content="Sugeng Hidayat, S.Pd.">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/flipbook.css">
+
+  <!-- FAVICON (opsional) -->
+  <link rel="icon" href="img/logo.png">
+
 </head>
 
 <body>
 
 <div id="app">
 
-  <!-- COVER -->
+  <!-- ================= COVER ================= -->
   <section id="cover">
     <h1>Aku Cerdas Mengelola Kebutuhan</h1>
-    <h3>IPS Kelas 4 SD</h3>
+    <h3>Literasi & Numerasi IPS Kelas 4 SD</h3>
+    <p>SDN Ranuklindungan I</p>
     <button onclick="App.start()">Mulai Belajar</button>
   </section>
 
-  <!-- FLIPBOOK -->
+  <!-- ================= FLIPBOOK ================= -->
   <div id="flipbook" class="hidden"></div>
 
-  <!-- QUIZ -->
+  <!-- ================= QUIZ ================= -->
   <div id="quizPage" class="hidden"></div>
 
-  <!-- CERTIFICATE -->
+  <!-- ================= CERTIFICATE ================= -->
   <div id="certificatePage" class="hidden"></div>
 
 </div>
 
-<!-- LIBRARY -->
+<!-- ================= GURU VIRTUAL ================= -->
+<div id="guruVirtual">
+  <img src="img/guru.png" alt="Guru Virtual">
+</div>
+
+<!-- ================= LIBRARY (WAJIB) ================= -->
+
+<!-- jQuery (untuk turn.js) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Flipbook Engine -->
 <script src="lib/turn.min.js"></script>
+
+<!-- Chart (Piktogram & Diagram) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- QR Code -->
 <script src="lib/qrcode.min.js"></script>
 
-<!-- MODULE -->
+<!-- ================= MODULE UTAMA ================= -->
 <script src="js/app.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/audio.js"></script>
@@ -43,6 +70,18 @@
 <script src="js/chart.js"></script>
 <script src="js/game.js"></script>
 <script src="js/certificate.js"></script>
+
+<!-- ================= INIT SAFE ================= -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("✅ MPI Siap Digunakan");
+
+    // preload audio (anti delay)
+    if (window.Audio && Audio.flip) {
+      Audio.flip.load();
+    }
+  });
+</script>
 
 </body>
 </html>
