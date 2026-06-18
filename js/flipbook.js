@@ -1,86 +1,111 @@
-/* ===========================
-   FLIPBOOK CONTAINER
-=========================== */
-#flipbook {
-  width: 100%;
-  height: 100vh;
-  background: #eaeaea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+const Flipbook = {
 
-/* ===========================
-   BOOK WRAPPER
-=========================== */
-#book {
-  width: 900px;
-  height: 550px;
-}
+  init() {
+    console.log("✅ Flipbook init jalan");
 
-/* ===========================
-   PAGE STYLE
-=========================== */
-.page {
-  background: white;
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.6;
-}
+    const container = document.getElementById("flipbook");
+    container.classList.remove("hidden");
 
-/* ===========================
-   LEFT & RIGHT PAGE EFFECT
-=========================== */
-.page:nth-child(odd) {
-  background: #ffffff;
-}
+    container.innerHTML = `
+      <div id="book">
 
-.page:nth-child(even) {
-  background: #fdfdfd;
-}
+        <div class="page cover">
+          <h1>Aku Cerdas Mengelola Kebutuhan</h1>
+          <p>IPS Kelas 4 SD</p>
+          <img src="img/guru.png">
+        </div>
 
-/* ===========================
-   SHADOW EFFECT (REAL BOOK)
-=========================== */
-.turn-page {
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-}
+        <div class="page">
+          <h2>Apa itu Kebutuhan?</h2>
+          <p>Kebutuhan adalah sesuatu yang harus dipenuhi agar hidup nyaman.</p>
+        </div>
 
-/* ===========================
-   PAGE CONTENT
-=========================== */
-.page h2 {
-  color: var(--secondary);
-  margin-bottom: 10px;
-}
+        <div class="page">
+          <h2>Jenis Kebutuhan</h2>
+          <ul>
+            <li>Primer</li>
+            <li>Sekunder</li>
+            <li>Tersier</li>
+          </ul>
+        </div>
 
-.page p {
-  margin-bottom: 10px;
-}
+        <div class="page">
+          <h2>Piktogram</h2>
+          <canvas id="chart1"></canvas>
+        </div>
 
-/* ===========================
-   NEXT BUTTON INSIDE BOOK
-=========================== */
-.page button {
-  margin-top: 20px;
-}
+        <div class="page">
+          <h2>Latihan</h2>
+          <p>Uang 20000 - 15000 = ?</p>
+          <button onclick="Flipbook.cek(5000)">5000</button>
+          <button onclick="Flipbook.cek(3000)">3000</button>
+          <p id="hasil"></p>
+        </div>
 
-/* ===========================
-   MOBILE OPTIMIZATION
-=========================== */
-@media (max-width: 768px) {
-  #book {
-    width: 100%;
-    height: 100%;
+        <div class="page">
+          <h2>Siap Quiz?</h2>
+          <button onclick="App.goQuiz()">Mulai Quiz</button>
+        </div>
+
+      </div>
+    `;
+
+    this.initTurn();
+    this.initChart();
+  },
+
+
+  initTurn() {
+    console.log("✅ Init Turn.js");
+
+    if (typeof $ === "undefined") {
+      alert("jQuery belum loaded!");
+      return;
+    }
+
+    if (!$('#book').turn) {
+      alert("turn.js gagal load!");
+      return;
+    }
+
+    $('#book').turn({
+      width: 900,
+      height: 550,
+      autoCenter: true
+    });
+  },
+
+
+  initChart() {
+    console.log("✅ Init Chart");
+
+    const ctx = document.getElementById("chart1");
+
+    if (!ctx) return;
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Makan', 'Main', 'Belajar'],
+        datasets: [{
+          data: [5, 3, 4],
+          backgroundColor: ['orange', 'blue', 'gray']
+        }]
+      }
+    });
+  },
+
+
+  cek(jawaban) {
+    const hasil = document.getElementById("hasil");
+
+    if (jawaban === 5000) {
+      hasil.innerHTML = "✅ Benar!";
+      hasil.style.color = "green";
+    } else {
+      hasil.innerHTML = "❌ Salah!";
+      hasil.style.color = "red";
+    }
   }
 
-  .page {
-    font-size: 16px;
-  }
-}
-
-<!-- HALAMAN PIKTOGRAM FULL -->
-<div class="page">
-  <h2>Analisis Data (AKM)</h2>
-  <div id="piktogramContainer"></div>
-</div>
+};
