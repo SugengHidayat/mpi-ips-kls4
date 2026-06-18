@@ -1,0 +1,9 @@
+.cover {
+  background: linear-gradient(135deg, #ff8c00, #0077b6);
+  color: white;
+  text-align: center;
+}
+
+.cover h1 {
+  font-size: 28px;
+}
